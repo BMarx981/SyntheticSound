@@ -12,7 +12,24 @@
 		79CFC12D1E06DFF30091AC1B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79CFC12B1E06DFF30091AC1B /* Main.storyboard */; };
 		79CFC12F1E06DFF30091AC1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79CFC12E1E06DFF30091AC1B /* Assets.xcassets */; };
 		79CFC1321E06DFF30091AC1B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79CFC1301E06DFF30091AC1B /* LaunchScreen.storyboard */; };
+		79CFC13A1E06E0260091AC1B /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79CFC1391E06E0260091AC1B /* AudioKit.framework */; };
+		79CFC13B1E06E0260091AC1B /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 79CFC1391E06E0260091AC1B /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		79D96F691E06EEFE00AFEFB4 /* Synth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D96F681E06EEFE00AFEFB4 /* Synth.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		79CFC13C1E06E0270091AC1B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				79CFC13B1E06E0260091AC1B /* AudioKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		79CFC1241E06DFF30091AC1B /* SyntheticSound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SyntheticSound.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,6 +39,8 @@
 		79CFC12E1E06DFF30091AC1B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		79CFC1311E06DFF30091AC1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		79CFC1331E06DFF30091AC1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		79CFC1391E06E0260091AC1B /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
+		79D96F681E06EEFE00AFEFB4 /* Synth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Synth.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79CFC13A1E06E0260091AC1B /* AudioKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +58,7 @@
 		79CFC11B1E06DFF20091AC1B = {
 			isa = PBXGroup;
 			children = (
+				79CFC1391E06E0260091AC1B /* AudioKit.framework */,
 				79CFC1261E06DFF30091AC1B /* SyntheticSound */,
 				79CFC1251E06DFF30091AC1B /* Products */,
 			);
@@ -57,6 +78,7 @@
 				79CFC1271E06DFF30091AC1B /* AppDelegate.swift */,
 				79CFC1291E06DFF30091AC1B /* ViewController.swift */,
 				79CFC12B1E06DFF30091AC1B /* Main.storyboard */,
+				79D96F681E06EEFE00AFEFB4 /* Synth.swift */,
 				79CFC12E1E06DFF30091AC1B /* Assets.xcassets */,
 				79CFC1301E06DFF30091AC1B /* LaunchScreen.storyboard */,
 				79CFC1331E06DFF30091AC1B /* Info.plist */,
@@ -74,6 +96,7 @@
 				79CFC1201E06DFF30091AC1B /* Sources */,
 				79CFC1211E06DFF30091AC1B /* Frameworks */,
 				79CFC1221E06DFF30091AC1B /* Resources */,
+				79CFC13C1E06E0270091AC1B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -136,6 +159,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79D96F691E06EEFE00AFEFB4 /* Synth.swift in Sources */,
 				79CFC12A1E06DFF30091AC1B /* ViewController.swift in Sources */,
 				79CFC1281E06DFF30091AC1B /* AppDelegate.swift in Sources */,
 			);
@@ -260,6 +284,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = SyntheticSound/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Bmarx.SyntheticSound;
@@ -272,6 +300,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = SyntheticSound/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Bmarx.SyntheticSound;
@@ -299,6 +331,7 @@
 				79CFC1381E06DFF40091AC1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
