@@ -19,6 +19,7 @@ class Synth {
     
     var mixer = AKMixer()
     
+    var mainOscFreq = 1000.0
     var mainFilterFreq = 1000.0
     
     init() {
@@ -62,6 +63,14 @@ class Synth {
             default: break
         }
     }//end setFilter
+    
+    func setFilterFreq(freq: Double) {
+        mainFilterFreq = freq
+    }
+    
+    func setOscFreq(freq: Double) {
+        mainOscFreq = freq
+    }
 
     
 }
