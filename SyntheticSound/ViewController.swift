@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     let synth = Synth()
     override func viewDidLoad() {
         super.viewDidLoad()
-        synth.mixer.start()
+        AudioKit.output = synth.mixer
         AudioKit.start()
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -24,11 +24,13 @@ class ViewController: UIViewController {
         if synth.mixer.isPlaying {
             sender.setTitle("Play", for: .normal)
             sender.setTitleColor(UIColor.blue, for: .normal)
-            synth.mixer.stop()
+            mainOsc.stop()
+            //synth.mixer.stop()
         } else {
             sender.setTitle("Stop", for: .normal)
             sender.setTitleColor(UIColor.red, for: .normal)
-            synth.mixer.start()
+            mainOsc.start()
+            //synth.mixer.start()
         }
     }
     
