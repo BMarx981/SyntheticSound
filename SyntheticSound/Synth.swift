@@ -33,6 +33,7 @@ class Synth {
     
     func setOsc(osc: String) {
         mainOsc.stop()
+        print(osc)
         switch osc {
             case "saw": mainOsc = AKOscillator(waveform: AKTable(.sawtooth))
             case "square": mainOsc = AKOscillator(waveform: AKTable(.square))
@@ -45,7 +46,10 @@ class Synth {
     }//end setOsc
     
     func setFilter(filter: String) {
+        print(filter)
         switch filter {
+            
+            
             case "lp": //lp = AKLowPassFilter(mainOsc, cutoffFrequency: mainFilterFreq)
                 lp.dryWetMix = 100
                 bp.dryWetMix = 0

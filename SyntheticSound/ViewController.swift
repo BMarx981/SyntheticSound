@@ -21,26 +21,26 @@ class ViewController: UIViewController {
     
     //Play Stop button controls synth activation
     @IBAction func PlayStop(_ sender: UIButton) {
-        if synth.mixer.isPlaying {
+        if mainOsc.isPlaying {
             sender.setTitle("Play", for: .normal)
             sender.setTitleColor(UIColor.blue, for: .normal)
             mainOsc.stop()
-            //synth.mixer.stop()
+            synth.mixer.stop()
         } else {
             sender.setTitle("Stop", for: .normal)
             sender.setTitleColor(UIColor.red, for: .normal)
             mainOsc.start()
-            //synth.mixer.start()
+            synth.mixer.start()
         }
     }
     
     //OscSelector chooses which oscillator is used
     @IBAction func OscSelector(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
-            case 0: synth.setOsc(osc: "saw")
-            case 1: synth.setOsc(osc: "square")
-            case 2: synth.setOsc(osc: "sine")
-            case 3: synth.setOsc(osc: "triangle")
+            case 0: synth.setOsc(osc: "saw"); print(sender.selectedSegmentIndex)
+        case 1: synth.setOsc(osc: "square"); print(sender.selectedSegmentIndex)
+        case 2: synth.setOsc(osc: "sine"); print(sender.selectedSegmentIndex)
+        case 3: synth.setOsc(osc: "triangle"); print(sender.selectedSegmentIndex)
             default: break
         }
     }
