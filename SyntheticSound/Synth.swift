@@ -6,18 +6,17 @@
 //  Copyright © 2016 Brian Marx. All rights reserved.
 //
 
-import Foundation
 import AudioKit
 
-var mainOsc = AKOscillator(waveform: AKTable(.sawtooth))
+
 
 class Synth {
     
-    
-    var lp = AKLowPassFilter(mainOsc, cutoffFrequency: 1000.0)
-    var bp = AKBandPassFilter(mainOsc, centerFrequency: 1000.0)
-    var hp = AKHighPassFilter(mainOsc, cutoffFrequency: 1000.0)
-    var none = AKLowPassFilter(mainOsc, cutoffFrequency: 20000.0)
+    var mainOsc = AKOscillator(waveform: AKTable(.sawtooth))
+    var lp = AKLowPassFilter(AKOscillator(waveform: AKTable(.sawtooth)), cutoffFrequency: 1000.0)
+    var bp = AKBandPassFilter(AKOscillator(waveform: AKTable(.sawtooth)), centerFrequency: 1000.0)
+    var hp = AKHighPassFilter(AKOscillator(waveform: AKTable(.sawtooth)), cutoffFrequency: 1000.0)
+    var none = AKLowPassFilter(AKOscillator(waveform: AKTable(.sawtooth)), cutoffFrequency: 20000.0)
 
     var mixer = AKMixer()
     
@@ -25,6 +24,14 @@ class Synth {
     var mainFilterFreq = 1000.0
     
     init() {
+        lp = AKLowPassFilter(mainOsc, cutoffFrequency: mainFilterFreq)
+        lp.start()
+        bp = AKBandPassFilter(mainOsc, centerFrequency: mainFilterFreq)
+        bp.start()
+        hp = AKHighPassFilter(mainOsc, cutoffFrequency: mainFilterFreq)
+        hp.start()
+        none = AKLowPassFilter(mainOsc, cutoffFrequency: 20000.0)
+        none.start()
         
         mixer = AKMixer(lp, bp, hp, none)
         mixer.volume = 1.0
@@ -35,10 +42,14 @@ class Synth {
         mainOsc.stop()
         print(osc)
         switch osc {
-            case "saw": mainOsc = AKOscillator(waveform: AKTable(.sawtooth))
-            case "square": mainOsc = AKOscillator(waveform: AKTable(.square))
-            case "sine": mainOsc = AKOscillator(waveform: AKTable(.sine))
-            case "triangle": mainOsc = AKOscillator(waveform: AKTable(.triangle))
+            case "saw":
+                mainOsc = AKOscillator(waveform: AKTable(.sawtooth))
+            case "square":
+                mainOsc = AKOscillator(waveform: AKTable(.square))
+            case "sine":
+                mainOsc = AKOscillator(waveform: AKTable(.sine))
+            case "triangle":
+                mainOsc = AKOscillator(waveform: AKTable(.triangle))
             default:
                 break;
         }
@@ -48,8 +59,6 @@ class Synth {
     func setFilter(filter: String) {
         print(filter)
         switch filter {
-            
-            
             case "lp": //lp = AKLowPassFilter(mainOsc, cutoffFrequency: mainFilterFreq)
                 lp.dryWetMix = 100
                 bp.dryWetMix = 0
@@ -75,7 +84,9 @@ class Synth {
     }//end setFilter
     
     func setFilterFreq(freq: Double) {
+        
         mainFilterFreq = freq
+        print(String(mainFilterFreq))
     }
     
     func setOscFreq(freq: Double) {
