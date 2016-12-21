@@ -8,20 +8,20 @@
 
 import AudioKit
 
-
-
 class Synth {
-    
-    var mainOsc = AKOscillator(waveform: AKTable(.sawtooth))
-    var lp = AKLowPassFilter(AKOscillator(waveform: AKTable(.sawtooth)), cutoffFrequency: 1000.0)
-    var bp = AKBandPassFilter(AKOscillator(waveform: AKTable(.sawtooth)), centerFrequency: 1000.0)
-    var hp = AKHighPassFilter(AKOscillator(waveform: AKTable(.sawtooth)), cutoffFrequency: 1000.0)
-    var none = AKLowPassFilter(AKOscillator(waveform: AKTable(.sawtooth)), cutoffFrequency: 20000.0)
-
-    var mixer = AKMixer()
     
     var mainOscFreq = 1000.0
     var mainFilterFreq = 1000.0
+    
+    var mainOsc = AKOscillator(waveform: AKTable(.sawtooth))
+    var lp = AKLowPassFilter(AKOscillator(), cutoffFrequency: 1000.0)
+    var bp = AKBandPassFilter(AKOscillator(), centerFrequency: 1000.0)
+    var hp = AKHighPassFilter(AKOscillator(), cutoffFrequency: 1000.0)
+    var none = AKLowPassFilter(AKOscillator(), cutoffFrequency: 20000.0)
+
+    var mixer = AKMixer()
+    
+
     
     init() {
         lp = AKLowPassFilter(mainOsc, cutoffFrequency: mainFilterFreq)
@@ -59,22 +59,22 @@ class Synth {
     func setFilter(filter: String) {
         print(filter)
         switch filter {
-            case "lp": //lp = AKLowPassFilter(mainOsc, cutoffFrequency: mainFilterFreq)
+            case "lp": lp = AKLowPassFilter(mainOsc, cutoffFrequency: mainFilterFreq)
                 lp.dryWetMix = 100
                 bp.dryWetMix = 0
                 hp.dryWetMix = 0
                 none.dryWetMix = 0
-            case "bp": //bp = AKBandPassFilter(mainOsc, centerFrequency: mainFilterFreq)
+            case "bp": bp = AKBandPassFilter(mainOsc, centerFrequency: mainFilterFreq)
                 bp.dryWetMix = 100
                 lp.dryWetMix = 0
                 hp.dryWetMix = 0
                 none.dryWetMix = 0
-            case "hp": //hp = AKHighPassFilter(mainOsc, cutoffFrequency: mainFilterFreq)
+            case "hp": hp = AKHighPassFilter(mainOsc, cutoffFrequency: mainFilterFreq)
                 hp.dryWetMix = 100
                 bp.dryWetMix = 0
                 lp.dryWetMix = 0
                 none.dryWetMix = 0
-            case "none": //none = AKHighShelfFilter(mainOsc, cutOffFrequency: 20000.0)
+            case "none": none = AKLowPassFilter(mainOsc, cutoffFrequency: 20000.0)
                 bp.dryWetMix = 0
                 hp.dryWetMix = 0
                 lp.dryWetMix = 0
@@ -84,14 +84,16 @@ class Synth {
     }//end setFilter
     
     func setFilterFreq(freq: Double) {
-        
         mainFilterFreq = freq
-        print(String(mainFilterFreq))
     }
     
     func setOscFreq(freq: Double) {
         mainOscFreq = freq
     }
 
+    func startYourEngine() {
+        AudioKit.output = mixer
+        AudioKit.start()
+    }
     
 }

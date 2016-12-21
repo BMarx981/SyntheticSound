@@ -11,12 +11,11 @@ import AudioKit
 
 class ViewController: UIViewController {
 
-    var synth = Synth()
+    let synth = Synth()
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        AudioKit.output = synth.mixer
-        AudioKit.start()
+        synth.startYourEngine()
         // Do any additional setup after loading the view, typically from a nib.
     }
     
